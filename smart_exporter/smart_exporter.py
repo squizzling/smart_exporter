@@ -38,17 +38,17 @@ class SMARTMetrics(object):
 
     def clear_labels(self, serials):
         for serial in serials:
-            print 'Removing {}'.format(serial)
+            # print 'Removing {}'.format(serial)
             cache = self.label_cache[serial]
             for attribute_name in cache.iterkeys():
-                print 'Removing {}:{}'.format(serial, attribute_name)
+                # print 'Removing {}:{}'.format(serial, attribute_name)
                 self.attributes.remove(serial, attribute_name)
             del self.label_cache[serial]
 
     def update_metrics(self):
         for serial, device in self.devices.iteritems():
             if serial not in self.label_cache:
-                print 'Adding {}'.format(serial)
+                # print 'Adding {}'.format(serial)
                 self.label_cache[serial] = {}
             metrics = self.label_cache[serial]
             for attribute in device.attributes:
@@ -68,8 +68,6 @@ class SMARTMetrics(object):
 
         removed_serials = old_serials - new_serials
         added_serials = new_serials - old_serials
-
-        print removed_serials
 
         # Clean up metrics
         self.clear_labels(removed_serials)
